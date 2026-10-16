@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipping Bill Creation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">SHIP<span>DOC</span></div>
+    <p>Export Documentation System</p>
+  </header>
+
+  <main class="container">
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">EXPORT MANAGEMENT</p>
+        <h1>Shipping Bill Creation</h1>
+        <p class="subtitle">Enter shipment information to create a draft.</p>
+      </div>
+      <span class="status">● Draft</span>
+    </div>
+
+    <form id="shippingForm">
+
+      <section class="card">
+        <h2>01. Shipping Information</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="billNo">Shipping Bill Number</label>
+            <input id="billNo" placeholder="e.g. SB-2026-001" required>
+          </div>
+          <div class="field">
+            <label for="billDate">Shipping Bill Date</label>
+            <input type="date" id="billDate" required>
+          </div>
+          <div class="field">
+            <label for="port">Port of Loading</label>
+            <input id="port" placeholder="e.g. Chennai" required>
+          </div>
+          <div class="field">
+            <label for="destination">Destination Country</label>
+            <input id="destination" placeholder="e.g. United States" required>
+          </div>
+          <div class="field full">
+            <label for="transport">Mode of Transport</label>
+            <select id="transport" required>
+              <option value="">Select transport</option>
+              <option>Sea</option>
+              <option>Air</option>
+              <option>Road</option>
+              <option>Rail</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>02. Exporter Details</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="exporter">Exporter / Company Name</label>
+            <input id="exporter" placeholder="Company name" required>
+          </div>
+          <div class="field">
+            <label for="iec">IEC Number</label>
+            <input id="iec" placeholder="Importer Exporter Code"
+                   maxlength="10" required>
+          </div>
+          <div class="field full">
+            <label for="address">Exporter Address</label>
+            <textarea id="address" rows="3"
+                      placeholder="Enter complete address" required></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>03. Buyer Details</h2>
+        <div class="form-grid">
+          <div class="field">
+            <label for="buyer">Buyer Name</label>
+            <input id="buyer" placeholder="Buyer / company name" required>
+          </div>
+          <div class="field">
+            <label for="buyerCountry">Buyer Country</label>
+            <input id="buyerCountry" placeholder="Country" required>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>04. Product & Invoice Details</h2>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="product">Product Description</label>
+            <input id="product" placeholder="e.g. Cotton T-shirts" required>
+          </div>
+          <div class="field">
+            <label for="hsCode">HS Code</label>
+            <input id="hsCode" placeholder="Product classification code" required>
+          </div>
+          <div class="field">
+            <label for="invoice">Invoice Number</label>
+            <input id="invoice" placeholder="e.g. INV-001" required>
+          </div>
+          <div class="field">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" min="0.01"
+                   step="any" placeholder="Enter quantity" required>
+          </div>
+          <div class="field">
+            <label for="unitPrice">Unit Price (INR)</label>
+            <input type="number" id="unitPrice" min="0"
+                   step="any" placeholder="Enter price" required>
+          </div>
+          <div class="field">
+            <label for="currency">Invoice Currency</label>
+            <select id="currency" required>
+              <option value="INR">INR - Indian Rupee</option>
+              <option value="USD">USD - US Dollar</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="GBP">GBP - British Pound</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="packages">Number of Packages</label>
+            <input type="number" id="packages" min="1"
+                   step="1" placeholder="e.g. 25" required>
+          </div>
+        </div>
+
+        <div class="total-box">
+          <div>
+            <span>Calculated Invoice Value</span>
+            <small>Quantity × Unit Price</small>
+          </div>
+          <strong id="totalValue">INR 0.00</strong>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="reset" class="btn secondary">Clear Form</button>
+        <button type="submit" class="btn primary">Create Shipping Bill →</button>
+      </div>
+    </form>
+
+    <section id="preview" class="card preview" hidden>
+      <div class="preview-heading">
+        <div>
+          <p class="eyebrow">DOCUMENT PREVIEW</p>
+          <h2>Shipping Bill Draft</h2>
+        </div>
+        <span class="status">Draft only</span>
+      </div>
+      <div id="previewContent"></div>
+      <div class="actions no-print">
+        <button id="printBtn" class="btn primary" type="button">
+          Print Draft
+        </button>
+      </div>
+      <p class="notice">
+        This is a demonstration document, not an official customs-issued
+        shipping bill.
+      </p>
+    </section>
+  </main>
+
+  <footer>SHIPDOC · Shipping Documentation Demo</footer>
+  <script src="script.js"></script>
+</body>
+</html>
